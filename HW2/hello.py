@@ -1,22 +1,19 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class Animal(object):
-    def run(self):
-        print('Animal is running...')
+test = "yahoo!" if 1> 2 else "FALSE"[0]
+print test
 
-def run_twice(animal):
-    animal.run()
-    animal.run()
+li = []
+li.append((1,2))
+a,b = li[0]
+print a,b
 
-class Tortoise(Animal):
-    def run(self):
-        print('Tortoise is running slowly...')
+def varargs(*args):
+    ss = float(sum(args))/len(args)
+    return ss
 
-class Timer(object):
-    def run(self):
-        print('Start...')
+test = varargs(1,2,3,7,9)  # => (1,2,3)
+print  test
 
-run_twice(Tortoise())
-
-run_twice(Timer())
+import math
+print dir(math)
