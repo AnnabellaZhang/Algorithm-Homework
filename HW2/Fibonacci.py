@@ -26,8 +26,9 @@ def re_f(n):
         return 1
     return re_f(n-1)+re_f(n-2)
 
+
 k = 1
-while k < 7:
+while k < 6:
     num = math.pow(2, k)
     print num
     t0 = time.time()
