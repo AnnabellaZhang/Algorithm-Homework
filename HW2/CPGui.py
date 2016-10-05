@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import sys
 from PyQt4 import QtCore, QtGui, uic
-'''
+
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
-'''
+
 
 import math
 sys.path.append('E:\Code\GitHub\Algorithm-Homework\HW2\CP.py')
@@ -25,20 +25,26 @@ class MyApp(QtGui.QMainWindow, CP.Ui_mainWindow):
         self.ConfirmAppendFunc.clicked.connect(self.confirmFunc)
         self.RandomButton.clicked.connect(self.randomAppendFunc)
         self.HandButton.clicked.connect(self.handAppendFunc)
+        self.StartCP.setEnabled(True)
         self.StartCP.clicked.connect(self.CPCompute)
+        ax = self.figure.add_subplot(111)
+        ax.axis([100,720,80,720])
+
 
     def mousePressEvent(self,event):
         if event.button() == QtCore.Qt.LeftButton:
             pos = event.pos()
-            if pos.x() <= 800 and pos.y() <= 800:
+            if 100 <= pos.x() <= 720 and 80 <= pos.y() <= 720:
                 self.ball_x.setText(str(pos.x()))
-                self.ball_y.setText(str(pos.y()))
-            if self.isHand and self.HandButton.isEnabled():
-                nownum = int(self.PointNum.text())
-                self.nodes.append((pos.x(),pos.y()))
-                nownum += 1
-                self.PointNum.setText(str(nownum))
-                #print self.nodes
+                self.ball_y.setText(str(800 - pos.y()))
+                if self.isHand and self.HandButton.isEnabled():
+                    nownum = int(self.PointNum.text())
+                    self.nodes.append((pos.x(),800 - pos.y()))
+                    plt.scatter(pos.x(), 800-pos.y())
+                    self.canvas.draw()
+                    nownum += 1
+                    self.PointNum.setText(str(nownum))
+                    #print self.nodes
 
 
     def confirmFunc(self):
@@ -46,6 +52,11 @@ class MyApp(QtGui.QMainWindow, CP.Ui_mainWindow):
         self.DivideCP.setEnabled(False)
         self.DivideCP.setChecked(False)
         self.StartCP.setEnabled(False)
+
+        plt.cla()
+        ax = self.figure.add_subplot(111)
+        ax.axis([100, 720, 80, 720])
+        self.canvas.draw()
         if self.HandAppend.isChecked() == True:
             self.nodes = []
             self.RandomPointNum.setEnabled(False)
@@ -63,26 +74,38 @@ class MyApp(QtGui.QMainWindow, CP.Ui_mainWindow):
     def randomAppendFunc(self):
         self.num = -1
         self.num = self.RandomPointNum.text()
-        #此处加一段格式检查
-        self.nodes = []
-        for i in range(0, int(self.num)):
-            x = random.uniform(0, 1.5*int(self.num))
-            y = random.uniform(0, 1.5*int(self.num))
-            self.nodes.append((round(x,2), round(y,2)))
-            #self.nodes.append((x, y))
-            #此处将生成的点在view上标出
-        if len(self.nodes) >= 2:
-            self.BruteCP.setEnabled(True)
-            self.DivideCP.setEnabled(True)
-            self.DivideCP.setChecked(True)
-            self.StartCP.setEnabled(True)
-            self.RandomButton.setEnabled(False)
-            #self.RandomPointNum.setText("")
-            self.RandomPointNum.setEnabled(False)
+        if self.isNum(self.num):
+            self.nodes = []
+            plt.cla()
+            ax = self.figure.add_subplot(111)
+            self.canvas.draw()
+            for i in range(0, int(self.num)):
+                x = random.uniform(0, 1.5*int(self.num))
+                y = random.uniform(0, 1.5*int(self.num))
+                self.nodes.append((round(x,2), round(y,2)))
+                if int(self.num) <= 50:
+                    plt.scatter(round(x,2), round(y,2))
+                    self.canvas.draw()
+                #self.nodes.append((x, y))
+            if len(self.nodes) >= 2:
+                self.BruteCP.setEnabled(True)
+                self.DivideCP.setEnabled(True)
+                self.DivideCP.setChecked(True)
+                self.StartCP.setEnabled(True)
+                self.RandomButton.setEnabled(False)
+                #self.RandomPointNum.setText("")
+                self.RandomPointNum.setEnabled(False)
+
+    def isNum(self,QString):
+        try:
+            int(QString)
+            return True
+        except (TypeError,ValueError):
+            return False
 
        # print self.nodes
-        print int(self.num)
-        print len(self.nodes)
+        #print int(self.num)
+        #print len(self.nodes)
 
     def handAppendFunc(self):
         if len(self.nodes) >= 2:
@@ -91,8 +114,8 @@ class MyApp(QtGui.QMainWindow, CP.Ui_mainWindow):
             self.DivideCP.setChecked(True)
             self.StartCP.setEnabled(True)
             self.HandButton.setEnabled(False)
-        print self.nodes
-        print len(self.nodes)
+        #print self.nodes
+        #print len(self.nodes)
 
     def CPCompute(self):
         if self.BruteCP.isChecked() == True:
@@ -113,7 +136,11 @@ class MyApp(QtGui.QMainWindow, CP.Ui_mainWindow):
             self.Point2.setText(str(r1[1]))
             self.Point2.adjustSize()
             self.ShortDis.setText(str(r1[2]))
-
+        #if self.isHand:
+        plt.scatter(r1[0][0],r1[0][1],color="r")
+        plt.scatter(r1[1][0],r1[1][1],color = "r")
+        plt.plot((r1[0][0],r1[1][0]),(r1[0][1],r1[1][1]),color="g")
+        self.canvas.draw()
 
 
     # 暴力算法找最近点对
@@ -172,5 +199,4 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     window = MyApp()
     window.show()
-    window.num = 123
     sys.exit(app.exec_())

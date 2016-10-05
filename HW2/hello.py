@@ -31,6 +31,16 @@ print sorted(nodes,key = choosex)
 print sorted(nodes,key = lambda x:x[0])
 print filter(lambda x:7 > x[1] > 5,nodes)
 
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
+'''
+self.main_frame = mainWindow
+        self.figure = plt.figure(figsize=(8,6))
+        self.canvas = FigureCanvas(self.figure)
+        self.canvas.setGeometry(QtCore.QRect(0,0, 800, 800))
+        self.canvas.setParent(self.main_frame)
+        self.canvas.mousePressEvent = self.mousePressEvent
+'''
 
 
 

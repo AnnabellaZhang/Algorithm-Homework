@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -27,6 +29,15 @@ class Ui_mainWindow(object):
         mainWindow.setObjectName(_fromUtf8("mainWindow"))
         mainWindow.setEnabled(True)
         mainWindow.resize(992, 869)
+
+        self.main_frame = mainWindow
+        self.figure = plt.figure(figsize=(8, 6))
+        self.canvas = FigureCanvas(self.figure)
+        self.canvas.setGeometry(QtCore.QRect(0, 0, 800, 800))
+        self.canvas.setParent(self.main_frame)
+        self.canvas.mousePressEvent = self.mousePressEvent
+
+
         self.centralwidget = QtGui.QWidget(mainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.ball_x = QtGui.QLineEdit(self.centralwidget)
@@ -47,7 +58,7 @@ class Ui_mainWindow(object):
         self.label_11.setGeometry(QtCore.QRect(828, 200, 12, 20))
         self.label_11.setObjectName(_fromUtf8("label_11"))
         self.AppendFunc = QtGui.QGroupBox(self.centralwidget)
-        self.AppendFunc.setGeometry(QtCore.QRect(830, 20, 120, 80))
+        self.AppendFunc.setGeometry(QtCore.QRect(830, 20, 151, 80))
         self.AppendFunc.setObjectName(_fromUtf8("AppendFunc"))
         self.HandAppend = QtGui.QRadioButton(self.AppendFunc)
         self.HandAppend.setGeometry(QtCore.QRect(10, 20, 89, 16))
@@ -69,7 +80,7 @@ class Ui_mainWindow(object):
         self.PointNum.setGeometry(QtCore.QRect(890, 230, 58, 20))
         self.PointNum.setObjectName(_fromUtf8("PointNum"))
         self.ball_mouse_4 = QtGui.QLabel(self.centralwidget)
-        self.ball_mouse_4.setGeometry(QtCore.QRect(830, 290, 121, 16))
+        self.ball_mouse_4.setGeometry(QtCore.QRect(830, 290, 161, 16))
         self.ball_mouse_4.setObjectName(_fromUtf8("ball_mouse_4"))
         self.ball_mouse_5 = QtGui.QLabel(self.centralwidget)
         self.ball_mouse_5.setGeometry(QtCore.QRect(830, 320, 121, 16))
@@ -129,12 +140,6 @@ class Ui_mainWindow(object):
         self.RandomButton.setEnabled(False)
         self.RandomButton.setGeometry(QtCore.QRect(950, 320, 31, 21))
         self.RandomButton.setObjectName(_fromUtf8("RandomButton"))
-        self.PointZone = QtGui.QWidget(self.centralwidget)
-        self.PointZone.setGeometry(QtCore.QRect(10, 20, 800, 800))
-        self.PointZone.setMinimumSize(QtCore.QSize(800, 800))
-        self.PointZone.setMaximumSize(QtCore.QSize(800, 800))
-        self.PointZone.setMouseTracking(True)
-        self.PointZone.setObjectName(_fromUtf8("PointZone"))
         self.HandButton = QtGui.QPushButton(self.centralwidget)
         self.HandButton.setEnabled(False)
         self.HandButton.setGeometry(QtCore.QRect(950, 230, 31, 21))
@@ -156,13 +161,13 @@ class Ui_mainWindow(object):
         self.ball_mouse.setText(_translate("mainWindow", "鼠标位置", None))
         self.label_12.setText(_translate("mainWindow", "y:", None))
         self.label_11.setText(_translate("mainWindow", "x:", None))
-        self.AppendFunc.setTitle(_translate("mainWindow", "选点方式", None))
+        self.AppendFunc.setTitle(_translate("mainWindow", "选点方式（点击确定开始）", None))
         self.HandAppend.setText(_translate("mainWindow", "手动选点", None))
         self.RandomAppend.setText(_translate("mainWindow", "随机生成", None))
         self.ConfirmAppendFunc.setText(_translate("mainWindow", "确定", None))
         self.ball_mouse_2.setText(_translate("mainWindow", "手动选点：", None))
         self.ball_mouse_3.setText(_translate("mainWindow", "已选点数", None))
-        self.ball_mouse_4.setText(_translate("mainWindow", "随机生成：", None))
+        self.ball_mouse_4.setText(_translate("mainWindow", "随机生成(50点以内显示）：", None))
         self.ball_mouse_5.setText(_translate("mainWindow", "生成点数", None))
         self.CPFunc.setTitle(_translate("mainWindow", "选点方式", None))
         self.BruteCP.setText(_translate("mainWindow", "蛮力算法", None))
