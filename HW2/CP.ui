@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>mainWindow</class>
  <widget class="QMainWindow" name="mainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1006</width>
+    <width>992</width>
     <height>869</height>
    </rect>
   </property>
@@ -14,7 +17,399 @@
    <string>最近邻点对程序</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="MyView" name="PointZone">
+   <widget class="QLineEdit" name="ball_x">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>846</x>
+      <y>200</y>
+      <width>58</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse">
+    <property name="geometry">
+     <rect>
+      <x>828</x>
+      <y>180</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>鼠标位置</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ball_y">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>928</x>
+      <y>200</y>
+      <width>58</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>200</y>
+      <width>12</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>y:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>828</x>
+      <y>200</y>
+      <width>12</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>x:</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="AppendFunc">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>20</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>选点方式</string>
+    </property>
+    <widget class="QRadioButton" name="HandAppend">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>手动选点</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="RandomAppend">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>随机生成</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="ConfirmAppendFunc">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>110</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确定</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_2">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>150</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>手动选点：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_3">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>230</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>已选点数</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="PointNum">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>230</y>
+      <width>58</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_4">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>290</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>随机生成：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_5">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>320</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>生成点数</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="RandomPointNum">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>320</y>
+      <width>58</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="CPFunc">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>380</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>选点方式</string>
+    </property>
+    <widget class="QRadioButton" name="BruteCP">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>蛮力算法</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="DivideCP">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>分治算法</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="StartCP">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>470</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>开始计算</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_6">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>520</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>响应时间（秒）</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FuncTime">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>550</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Point2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>640</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Point1">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>610</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>818</x>
+      <y>610</y>
+      <width>12</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_7">
+    <property name="geometry">
+     <rect>
+      <x>818</x>
+      <y>590</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>最近点对</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>640</y>
+      <width>12</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ShortDis">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>710</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ball_mouse_8">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>680</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>最短距离</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="RandomButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>320</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>生成</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="PointZone" native="true">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -35,70 +430,24 @@
       <height>800</height>
      </size>
     </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
    </widget>
-   <widget class="QLineEdit" name="ball_x">
+   <widget class="QPushButton" name="HandButton">
     <property name="enabled">
      <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>838</x>
-      <y>40</y>
-      <width>58</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="ball_mouse">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>20</y>
-      <width>121</width>
-      <height>16</height>
+      <x>950</x>
+      <y>230</y>
+      <width>31</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>鼠标位置</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="ball_y">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>40</y>
-      <width>58</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>902</x>
-      <y>40</y>
-      <width>12</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>y:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>40</y>
-      <width>12</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>x:</string>
+     <string>生成</string>
     </property>
    </widget>
   </widget>
@@ -107,20 +456,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1006</width>
+     <width>992</width>
      <height>23</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MyView</class>
-   <extends>QGraphicsView</extends>
-   <header>myview.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
